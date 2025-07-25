@@ -21,7 +21,7 @@ def init_db():
 def store_userinfo(ip, user_agent, referrer, timestamp):
     conn = sqlite3.connect('userinfo.db')
     c = conn.cursor()
-    c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (?, ?, ?, ?)',
+    c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (?, ?, ?)',
               (ip, user_agent, timestamp))
     conn.commit()
     conn.close()
