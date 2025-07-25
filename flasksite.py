@@ -1,18 +1,21 @@
-from flask import Flask, request, render_template_string
-import sqlite3
-from datetime import datetime
 import os
+import psycopg2
+from flask import Flask, request, render_template_string
+from datetime import datetime
 
 app = Flask(__name__)
 
+DATABASE_URL = os.environ.get('DATABASE_URL')  # Set this in Render's environment variables
+
 def init_db():
-    conn = sqlite3.connect('userinfo.db')
+    conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
     c.execute('''
         CREATE TABLE IF NOT EXISTS userinfo (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             ip TEXT,
             user_agent TEXT,
+            referrer TEXT,
             timestamp TEXT
         )
     ''')
@@ -20,10 +23,10 @@ def init_db():
     conn.close()
 
 def store_userinfo(ip, user_agent, referrer, timestamp):
-    conn = sqlite3.connect('userinfo.db')
+    conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
-    c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (?, ?, ?)',
-              (ip, user_agent, timestamp))
+    c.execute('INSERT INTO userinfo (ip, user_agent, referrer, timestamp) VALUES (%s, %s, %s, %s)',
+              (ip, user_agent, referrer, timestamp))
     conn.commit()
     conn.close()
 
