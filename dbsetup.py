@@ -10,7 +10,6 @@ c.execute('''
         id SERIAL PRIMARY KEY,
         ip TEXT,
         user_agent TEXT,
-        referrer TEXT,
         timestamp TEXT
     )
 ''')
