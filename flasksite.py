@@ -67,7 +67,6 @@ HOME_HTML = '''
       <div class="center-btn">
         <button class="my-btn" onclick="window.location.href='/contact'">Contact Owner</button>
       </div>
-      <div class="ip">Your IP address: <b>{{ ip }}</b></div>
     </div>
   </body>
 </html>
