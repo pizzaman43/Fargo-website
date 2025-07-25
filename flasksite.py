@@ -12,7 +12,6 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             ip TEXT,
             user_agent TEXT,
-            referrer TEXT,
             timestamp TEXT
         )
     ''')
@@ -22,8 +21,8 @@ def init_db():
 def store_userinfo(ip, user_agent, referrer, timestamp):
     conn = sqlite3.connect('userinfo.db')
     c = conn.cursor()
-    c.execute('INSERT INTO userinfo (ip, user_agent, referrer, timestamp) VALUES (?, ?, ?, ?)',
-              (ip, user_agent, referrer, timestamp))
+    c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (?, ?, ?, ?)',
+              (ip, user_agent, timestamp))
     conn.commit()
     conn.close()
 
