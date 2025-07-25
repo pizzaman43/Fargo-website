@@ -91,7 +91,7 @@ ABOUT_HTML = '''
       <h1>About This Website</h1>
       <img src="/static/IMG_7041.jpg" alt="Dog paw" class="about-img">
       <p>
-        This website is designed to help return lost dogs to their owners. If you have found Buddy, please use the contact information provided to reach out to the owner. Thank you for helping reunite pets with their families!
+        This website is designed to help return Fargo to us. If you have found Fargo, please use the contact information provided to reach out to us. Thank you for helping reunite Fargo with us!
       </p>
     </div>
   </body>
@@ -116,9 +116,9 @@ CONTACT_HTML = '''
       <h1>Contact the Owner</h1>
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
-        <strong>Jane Doe</strong><br>
-        <strong>Phone:</strong> <a href="tel:5551234567">555-123-4567</a><br>
-        <strong>Email:</strong> <a href="mailto:ifoundfargo@icloud.com">ifoundfargo@icloud.com</a>
+        <strong>Confrey family</strong><br>
+        <strong>Phone:</strong> <a>555-123-4567</a><br>
+        <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
   </body>
