@@ -22,6 +22,9 @@ def init_db():
     conn.close()
 
 def store_userinfo(ip, user_agent, referrer, timestamp):
+    # Filter out health checks and monitoring tools
+    if ip == '127.0.0.1' and user_agent == 'Go-http-client/1.1':
+        return
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
     c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (%s, %s, %s)',
