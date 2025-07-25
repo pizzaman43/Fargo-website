@@ -116,7 +116,7 @@ CONTACT_HTML = '''
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        <strong>Phone:</strong> <a>555-123-4567</a><br>
+        <strong>Phone:</strong> <a>845-536-7118</a><br>
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
