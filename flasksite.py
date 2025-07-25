@@ -57,7 +57,7 @@ HOME_HTML = '''
   <body>
     ''' + NAVBAR + '''
     <div class="container">
-      <h1>Help Return My Dog!</h1>
+      <h1>Help Return Fargo!</h1>
       <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
       <div class="info">
         <strong>Name:</strong> Fargo<br>
