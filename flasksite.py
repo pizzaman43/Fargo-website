@@ -36,10 +36,17 @@ with app.app_context():
     init_db()
 
 NAVBAR = '''
-<nav style="background:#333;padding:1em;">
-  <a href="/" style="color:#fff;margin-right:1em;">Home</a>
-  <a href="/about" style="color:#fff;margin-right:1em;">About</a>
-  <a href="/contact" style="color:#fff;">Contact</a>
+<nav style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.2em; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+    <div style="font-size: 1.5em; font-weight: bold; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
+      🐕 Fargo
+    </div>
+    <div style="display: flex; gap: 2em;">
+      <a href="/" style="color: #fff; text-decoration: none; font-weight: 500; padding: 0.5em 1em; border-radius: 25px; transition: all 0.3s ease; hover: background: rgba(255,255,255,0.2); hover: transform: translateY(-2px);">🏠 Home</a>
+      <a href="/about" style="color: #fff; text-decoration: none; font-weight: 500; padding: 0.5em 1em; border-radius: 25px; transition: all 0.3s ease; hover: background: rgba(255,255,255,0.2); hover: transform: translateY(-2px);">ℹ️ About</a>
+      <a href="/contact" style="color: #fff; text-decoration: none; font-weight: 500; padding: 0.5em 1em; border-radius: 25px; transition: all 0.3s ease; hover: background: rgba(255,255,255,0.2); hover: transform: translateY(-2px);">📞 Contact</a>
+    </div>
+  </div>
 </nav>
 '''
 
