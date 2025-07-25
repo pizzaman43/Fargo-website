@@ -52,41 +52,20 @@ NAVBAR = '''
 
 HOME_HTML = '''
 <html>
-  {% extends "base.html" %}
-
-{% block title %}Help Return Fargo - Lost Dog Recovery{% endblock %}
-
-{% block content %}
-<div class="container">
-    <div class="hero-section">
-        <h1 class="hero-title">Help Return Fargo!</h1>
-        <p class="hero-subtitle">Our beloved Golden Doodle needs your help to get home</p>
-    </div>
-    
-    <div class="content-section">
-        <img src="{{ url_for('static', filename='IMG_6736.jpg') }}" alt="Fargo - Golden Doodle" class="dog-image" style="width: 350px; border: 4px solid #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
-        
-        <div class="info-grid">
-            <div class="info-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); transform: scale(1.05);">
-                <h3>🐕 Name</h3>
-                <p style="font-size: 1.4em; font-weight: bold;">Fargo</p>
-            </div>
-            <div class="info-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); transform: scale(1.05);">
-                <h3>🐾 Breed</h3>
-                <p style="font-size: 1.4em; font-weight: bold;">Golden Doodle</p>
-            </div>
-            <div class="info-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); transform: scale(1.05);">
-                <h3>👨‍👩‍👧‍👦 Owner</h3>
-                <p style="font-size: 1.4em; font-weight: bold;">Confrey Family</p>
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 3rem 0;">
-            <a href="/contact" class="btn" style="font-size: 1.3em; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); box-shadow: 0 8px 25px rgba(255,107,107,0.4);">📞 Contact Owner Now</a>
-        </div>
-    </div>
-</div>
-{% endblock %}
+  <head>
+    <title>Return My Dog - Home</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+      .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+      h1, h2 { text-align: center; }
+      .dog-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 250px; }
+      .info { text-align: center; font-size: 1.1em; margin-bottom: 2em; }
+      .ip { margin-top: 2em; text-align: center; color: #555; font-size: 0.95em; }
+      .center-btn { display: flex; justify-content: center; margin-top: 2em; }
+      .my-btn { background: #333; color: #fff; border: none; padding: 0.8em 2em; border-radius: 5px; font-size: 1em; cursor: pointer; }
+      .my-btn:hover { background: #555; }
+    </style>
+  </head>
   <body>
     ''' + NAVBAR + '''
     <div class="container">
@@ -107,85 +86,53 @@ HOME_HTML = '''
 
 ABOUT_HTML = '''
 <html>
-  {% extends "base.html" %}
-
-{% block title %}About - Help Return Fargo{% endblock %}
-
-{% block content %}
-<div class="container">
-    <div class="hero-section">
-        <h1 class="hero-title">About This Website</h1>
-        <p class="hero-subtitle">Helping reunite families with their lost pets</p>
+  <head>
+    <title>About - Return My Dog</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+      .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+      h1 { text-align: center; }
+      .about-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 200px; }
+      p { font-size: 1.1em; }
+    </style>
+  </head>
+  <body>
+    ''' + NAVBAR + '''
+    <div class="container">
+      <h1>About This Website</h1>
+      <img src="/static/IMG_7041.jpg" alt="Dog paw" class="about-img">
+      <p>
+        This website is designed to help return Fargo to us. If you have found Fargo, please use the contact information provided to reach out to us. Thank you for helping reunite Fargo with us!
+      </p>
     </div>
-    
-    <div class="content-section">
-        <img src="{{ url_for('static', filename='IMG_7041.jpg') }}" alt="Dog paw print" class="dog-image" style="width: 280px; border: 4px solid #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
-        
-        <div class="about-text" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <p style="font-size: 1.3em; line-height: 1.8; color: #2d3436; margin-bottom: 2rem;">
-                This website is designed to help return Fargo to his loving family. If you have found Fargo, 
-                please use the contact information provided to reach out to us immediately. 
-            </p>
-            <p style="font-size: 1.3em; line-height: 1.8; color: #2d3436; margin-bottom: 2rem;">
-                Fargo is a friendly Golden Doodle who loves attention and treats. He may be scared and confused 
-                being away from home, so please approach him gently if you see him.
-            </p>
-            <p style="font-size: 1.3em; line-height: 1.8; color: #2d3436;">
-                Thank you for helping reunite Fargo with his family! Your kindness means the world to us.
-            </p>
-        </div>
-        
-        <div style="text-align: center; margin: 3rem 0;">
-            <a href="/contact" class="btn" style="font-size: 1.3em; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 8px 25px rgba(102,126,234,0.4);">📞 Contact Us</a>
-        </div>
-    </div>
-</div>
-{% endblock %}
+  </body>
 </html>
 '''
 
 CONTACT_HTML = '''
 <html>
- {% extends "base.html" %}
-
-{% block title %}Contact Owner - Help Return Fargo{% endblock %}
-
-{% block content %}
-<div class="container">
-    <div class="hero-section">
-        <h1 class="hero-title">Contact the Owner</h1>
-        <p class="hero-subtitle">Please reach out if you've found Fargo</p>
+  <head>
+    <title>Contact Owner - Return My Dog</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+      .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+      h1 { text-align: center; }
+      .contact-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 180px; }
+      .contact-info { text-align: center; font-size: 1.1em; }
+    </style>
+  </head>
+  <body>
+    ''' + NAVBAR + '''
+    <div class="container">
+      <h1>Contact the Owner</h1>
+      <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
+      <div class="contact-info">
+        <strong>Confrey family</strong><br>
+        <strong>Phone:</strong> <a>845-536-7118</a><br>
+        <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
+      </div>
     </div>
-    
-    <div class="content-section">
-        <div class="emergency-banner" style="font-size: 1.4em; padding: 1.5rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(255,107,107,0.3);">
-            🚨 URGENT: If you see Fargo, please contact us immediately! 🚨
-        </div>
-        
-        <img src="{{ url_for('static', filename='IMG_7079.jpg') }}" alt="Fargo with collar" class="dog-image" style="width: 320px; border: 4px solid #fff; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
-        
-        <div class="contact-info" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); box-shadow: 0 15px 35px rgba(255,107,107,0.3);">
-            <h2 style="font-size: 2.5em; margin-bottom: 2rem;">Confrey Family</h2>
-            <div class="contact-item" style="font-size: 1.5em; margin: 1.5rem 0;">
-                📞 <strong>Phone:</strong> <a href="tel:845-536-7118" style="font-size: 1.2em;">845-536-7118</a>
-            </div>
-            <div class="contact-item" style="font-size: 1.5em; margin: 1.5rem 0;">
-                📧 <strong>Email:</strong> <a href="mailto:ifoundfargo@icloud.com" style="font-size: 1.2em;">ifoundfargo@icloud.com</a>
-            </div>
-            <div class="contact-item" style="font-size: 1.5em; margin: 1.5rem 0;">
-                ⏰ <strong>Available:</strong> 24/7 - Please call anytime!
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin: 3rem 0;">
-            <p style="font-size: 1.2em; color: #666; margin-bottom: 1rem;">
-                Thank you for your help in bringing Fargo home safely!
-            </p>
-            <a href="/" class="btn" style="font-size: 1.3em; padding: 1.2rem 2.5rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 8px 25px rgba(102,126,234,0.4);">🏠 Back to Home</a>
-        </div>
-    </div>
-</div>
-{% endblock %}
+  </body>
 </html>
 '''
 
