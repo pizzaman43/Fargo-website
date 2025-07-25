@@ -1,6 +1,34 @@
 from flask import Flask, request, render_template_string
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
+
+def init_db():
+    conn = sqlite3.connect('userinfo.db')
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS userinfo (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ip TEXT,
+            user_agent TEXT,
+            referrer TEXT,
+            timestamp TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+def store_userinfo(ip, user_agent, referrer, timestamp):
+    conn = sqlite3.connect('userinfo.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO userinfo (ip, user_agent, referrer, timestamp) VALUES (?, ?, ?, ?)',
+              (ip, user_agent, referrer, timestamp))
+    conn.commit()
+    conn.close()
+
+with app.app_context():
+    init_db()
 
 NAVBAR = '''
 <nav style="background:#333;padding:1em;">
@@ -30,7 +58,7 @@ HOME_HTML = '''
     ''' + NAVBAR + '''
     <div class="container">
       <h1>Help Return My Dog!</h1>
-      <img src="\static\IMG_6736.jpg" alt="Dog photo" class="dog-img">
+      <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
       <div class="info">
         <strong>Name:</strong> Fargo<br>
         <strong>Breed:</strong> Golden Doodle<br>
@@ -61,7 +89,7 @@ ABOUT_HTML = '''
     ''' + NAVBAR + '''
     <div class="container">
       <h1>About This Website</h1>
-      <img src="static\IMG_7041.jpg" alt="Dog paw" class="about-img">
+      <img src="/static/IMG_7041.jpg" alt="Dog paw" class="about-img">
       <p>
         This website is designed to help return lost dogs to their owners. If you have found Buddy, please use the contact information provided to reach out to the owner. Thank you for helping reunite pets with their families!
       </p>
@@ -80,20 +108,17 @@ CONTACT_HTML = '''
       h1 { text-align: center; }
       .contact-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 180px; }
       .contact-info { text-align: center; font-size: 1.1em; }
-      .center-btn { display: flex; justify-content: center; margin-top: 2em; }
-      .my-btn { background: #333; color: #fff; border: none; padding: 0.8em 2em; border-radius: 5px; font-size: 1em; cursor: pointer; }
-      .my-btn:hover { background: #555; }
     </style>
   </head>
   <body>
     ''' + NAVBAR + '''
     <div class="container">
       <h1>Contact the Owner</h1>
-      <img src="static\IMG_7079.jpg" alt="Dog with collar" class="contact-img">
+      <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Jane Doe</strong><br>
-        <strong>Phone:</strong> <a>555-123-4567</a><br>
-        <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
+        <strong>Phone:</strong> <a href="tel:5551234567">555-123-4567</a><br>
+        <strong>Email:</strong> <a href="mailto:ifoundfargo@icloud.com">ifoundfargo@icloud.com</a>
       </div>
     </div>
   </body>
@@ -103,6 +128,10 @@ CONTACT_HTML = '''
 @app.route('/')
 def home():
     ip = request.headers.get('X-Forwarded-For', request.remote_addr)
+    user_agent = request.headers.get('User-Agent', '')
+    referrer = request.referrer or ''
+    timestamp = datetime.now().isoformat()
+    store_userinfo(ip, user_agent, referrer, timestamp)
     return render_template_string(HOME_HTML, ip=ip)
 
 @app.route('/about')
@@ -115,4 +144,3 @@ def contact():
 
 if __name__ == '__main__':
     app.run(debug=True)
-            
