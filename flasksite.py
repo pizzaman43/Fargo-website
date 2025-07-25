@@ -25,7 +25,7 @@ def store_userinfo(ip, user_agent, referrer, timestamp):
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
     c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (%s, %s, %s)',
-              (ip, user_agent, referrer, timestamp))
+              (ip, user_agent, timestamp))
     conn.commit()
     conn.close()
 
