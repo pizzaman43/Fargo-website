@@ -15,7 +15,6 @@ def init_db():
             id SERIAL PRIMARY KEY,
             ip TEXT,
             user_agent TEXT,
-            referrer TEXT,
             timestamp TEXT
         )
     ''')
@@ -25,7 +24,7 @@ def init_db():
 def store_userinfo(ip, user_agent, referrer, timestamp):
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
-    c.execute('INSERT INTO userinfo (ip, user_agent, referrer, timestamp) VALUES (%s, %s, %s, %s)',
+    c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (%s, %s, %s)',
               (ip, user_agent, referrer, timestamp))
     conn.commit()
     conn.close()
