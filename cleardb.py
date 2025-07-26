@@ -1,6 +1,6 @@
 import psycopg2
 
-DATABASE_URL = "postgresql://fargodb_user:pYQQq6hrXsYfoQ7a4HlgpwVs0ItUL8xx@dpg-d21qmoidbo4c73eh4g50-a.ohio-postgres.render.com/fargodb"
+DATABASE_URL = os.environ.get('DATABASE_URL')  # Set this in Render's environment variables
 
 try:
     print("Connecting to database...")
