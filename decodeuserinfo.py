@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-DATABASE_URL = os.environ.get('DATABASE_URL')  # Set this in Render's environment variables
+DATABASE_URL = None # set to db link
 
 conn = psycopg2.connect(DATABASE_URL)
 c = conn.cursor()
