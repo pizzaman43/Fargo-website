@@ -1,39 +1,77 @@
 import os
 import psycopg2
-from flask import Flask, request, render_template_string
+import requests
+from flask import request, Flask, render_template_string
 from datetime import datetime
+from user_agents import parse as parse_user_agent
+
+# Get Render's DATABASE_URL from environment
+DATABASE_URL = os.environ.get('DATABASE_URL')  # Already set in your Render settings
 
 app = Flask(__name__)
-
-DATABASE_URL = os.environ.get('DATABASE_URL')  # Set this in Render's environment variables
 
 def init_db():
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
     c.execute('''
-        CREATE TABLE IF NOT EXISTS userinfo (
+        CREATE TABLE IF NOT EXISTS visits (
             id SERIAL PRIMARY KEY,
             ip TEXT,
-            user_agent TEXT,
-            timestamp TEXT
+            location TEXT,
+            device TEXT,
+            browser TEXT,
+            os TEXT,
+            referrer TEXT,
+            timestamp TIMESTAMPTZ DEFAULT NOW()
         )
     ''')
     conn.commit()
     conn.close()
 
-def store_userinfo(ip, user_agent, timestamp):
-    # Filter out health checks and monitoring tools
-    if ip == '127.0.0.1' and user_agent == 'Go-http-client/1.1':
+def get_real_ip(request):
+    xff = request.headers.get('X-Forwarded-For', request.remote_addr)
+    return xff.split(',')[0].strip()
+
+def geolocate_ip(ip):
+    try:
+        res = requests.get(f"https://ipapi.co/{ip}/json/")
+        data = res.json()
+        return f"{data.get('city', '?')}, {data.get('region', '?')}, {data.get('country_name', '?')}"
+    except:
+        return "Unknown Location"
+
+def store_visit(request):
+    ip = get_real_ip(request)
+    user_agent_string = request.headers.get("User-Agent")
+    timestamp = datetime.utcnow().isoformat()
+
+    # Skip Render health checks or bots
+    if ip == '127.0.0.1' and user_agent_string == 'Go-http-client/1.1':
         return
+
+    # Parse user agent
+    ua = parse_user_agent(user_agent_string)
+    device = "Mobile" if ua.is_mobile else "Tablet" if ua.is_tablet else "PC"
+    browser = f"{ua.browser.family} {ua.browser.version_string}"
+    os = f"{ua.os.family} {ua.os.version_string}"
+
+    location = geolocate_ip(ip)
+    referrer = request.referrer or 'Direct'
+
+    # Insert into PostgreSQL
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
-    c.execute('INSERT INTO userinfo (ip, user_agent, timestamp) VALUES (%s, %s, %s)',
-              (ip, user_agent, timestamp))
+    c.execute('''
+        INSERT INTO visits (ip, location, device, browser, os, referrer, timestamp)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    ''', (ip, location, device, browser, os, referrer, timestamp))
     conn.commit()
     conn.close()
 
+# Initialize table when app starts
 with app.app_context():
     init_db()
+
 
 NAVBAR = '''
 <style>
