@@ -194,7 +194,7 @@ def home():
     user_agent = request.headers.get('User-Agent', '')
     referrer = request.referrer or ''
     timestamp = datetime.now().isoformat()
-    store_userinfo(ip, user_agent, referrer, timestamp)
+    store_visit(request)
     return render_template_string(HOME_HTML, ip=ip)
 
 @app.route('/about')
