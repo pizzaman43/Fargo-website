@@ -21,7 +21,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-def store_userinfo(ip, user_agent, referrer, timestamp):
+def store_userinfo(ip, user_agent, timestamp):
     # Filter out health checks and monitoring tools
     if ip == '127.0.0.1' and user_agent == 'Go-http-client/1.1':
         return
