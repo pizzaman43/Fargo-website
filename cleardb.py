@@ -1,6 +1,9 @@
 import psycopg2
+import os
+import dotenv
 
-DATABASE_URL = os.environ.get('DATABASE_URL')  # Set this in Render's environment variables
+# Load environment variables from .env file
+pizza = dotenv.load_dotenv()
 
 try:
     print("Connecting to database...")
