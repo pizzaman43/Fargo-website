@@ -1,7 +1,10 @@
 import os
 import psycopg2
+import dotenv
 
-DATABASE_URL = None # set to db link
+# Load environment variables from .env file
+dotenv.load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 conn = psycopg2.connect(DATABASE_URL)
 c = conn.cursor()

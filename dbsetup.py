@@ -1,6 +1,10 @@
 import psycopg2
 import os
-DATABASE_URL = os.environ.get('DATABASE_URL')  # Set this in Render's environment variables
+import dotenv
+
+# Load environment variables from .env file
+dotenv.load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL") # Set this in Render's environment variables
 
 conn = psycopg2.connect(DATABASE_URL)
 c = conn.cursor()

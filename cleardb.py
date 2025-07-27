@@ -3,7 +3,8 @@ import os
 import dotenv
 
 # Load environment variables from .env file
-pizza = dotenv.load_dotenv()
+dotenv.load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 try:
     print("Connecting to database...")
