@@ -13,9 +13,11 @@ nophone = ""
 rewardpage = True
 
 if rewardpage == True:
-  homeheading = '<h1>Help Return Fargo <span style="color: red;">Reward Offered!</span></h1>'
+    homeheading = (
+        '<h1>Help Return Fargo <span style="color: red;">Reward Offered!</span></h1>'
+    )
 else:
-  homeheading = '<h1>Help Return Fargo</h1>'
+    homeheading = "<h1>Help Return Fargo</h1>"
 
 load_dotenv()
 
@@ -237,7 +239,9 @@ HOME_HTML = (
     + """
     <div class="container">
       <div class="content-box">
-        """ + homeheading +"""
+        """
+    + homeheading
+    + """
         <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
         <div class="info">
           <strong>Name:</strong> Fargo<br>
