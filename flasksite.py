@@ -91,25 +91,25 @@ with app.app_context():
 
 NAVBAR = """
 <style>
-.nav-link {
-  color: #fff !important;
-  text-decoration: none !important;
-  font-weight: 500 !important;
-  padding: 0.5em 1em !important;
-  border-radius: 25px !important;
-  transition: all 0.3s ease !important;
-}
-.nav-link:hover {
-  background: rgba(255,255,255,0.2) !important;
-  transform: translateY(-2px) !important;
-}
+  .nav-link {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    padding: 0.6em 1.2em !important;
+    border-radius: 30px !important;
+    transition: background 0.3s ease, transform 0.2s ease !important;
+  }
+  .nav-link:hover {
+    background: rgba(255,255,255,0.25) !important;
+    transform: translateY(-3px) !important;
+  }
 </style>
-<nav style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.2em; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-    <div style="font-size: 1.5em; font-weight: bold; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
+<nav style="background: linear-gradient(135deg, #5f72be 0%, #9921e8 100%); padding: 1.2em; box-shadow: 0 3px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+  <div style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+    <div style="font-size: 1.6em; font-weight: bold; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
       🐕 Fargo
     </div>
-    <div style="display: flex; gap: 2em;">
+    <div style="display: flex; gap: 1.8em;">
       <a href="/" class="nav-link">🏠 Home</a>
       <a href="/about" class="nav-link">ℹ️ About</a>
       <a href="/contact" class="nav-link">📞 Contact</a>
@@ -118,21 +118,68 @@ NAVBAR = """
 </nav>
 """
 
+
 HOME_HTML = (
     """
 <html>
   <head>
     <title>Return My Dog - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
-      .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
-      h1, h2 { text-align: center; }
-      .dog-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 250px; }
-      .info { text-align: center; font-size: 1.1em; margin-bottom: 2em; }
-      .ip { margin-top: 2em; text-align: center; color: #555; font-size: 0.95em; }
-      .center-btn { display: flex; justify-content: center; margin-top: 2em; }
-      .my-btn { background: #333; color: #fff; border: none; padding: 0.8em 2em; border-radius: 5px; font-size: 1em; cursor: pointer; }
-      .my-btn:hover { background: #555; }
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em 1em;
+      }
+      .content-box {
+        width: 100%;
+        max-width: 720px;
+        background: #fff;
+        padding: 2em;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      .dog-img {
+        margin: 1.5em auto;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+      }
+      .info {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        margin: 1.5em 0;
+      }
+      .center-btn {
+        margin-top: 2em;
+      }
+      .my-btn {
+        background: #5f72be;
+        color: #fff;
+        border: none;
+        padding: 0.9em 2.2em;
+        border-radius: 8px;
+        font-size: 1.05em;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+      .my-btn:hover {
+        background: #4a5bb3;
+      }
     </style>
   </head>
   <body>
@@ -140,33 +187,71 @@ HOME_HTML = (
     + NAVBAR
     + """
     <div class="container">
-      <h1>Help Return Fargo!</h1>
-      <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
-      <div class="info">
-        <strong>Name:</strong> Fargo<br>
-        <strong>Breed:</strong> Golden Doodle<br>
-        <strong>Owner:</strong> Confrey Family<br>
-      </div>
-      <div class="center-btn">
-        <button class="my-btn" onclick="window.location.href='/contact'">Contact Owner</button>
+      <div class="content-box">
+        <h1>Help Return Fargo!</h1>
+        <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
+        <div class="info">
+          <strong>Name:</strong> Fargo<br>
+          <strong>Breed:</strong> Golden Doodle<br>
+          <strong>Owner:</strong> Confrey Family<br>
+        </div>
+        <div class="center-btn">
+          <button class="my-btn" onclick="window.location.href='/contact'">Contact Owner</button>
+        </div>
       </div>
     </div>
   </body>
 </html>
 """
 )
+
+
 
 ABOUT_HTML = (
     """
 <html>
   <head>
     <title>About - Return My Dog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
-      .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
-      h1 { text-align: center; }
-      .about-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 200px; }
-      p { font-size: 1.1em; }
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em 1em;
+      }
+      .content-box {
+        width: 100%;
+        max-width: 720px;
+        background: #fff;
+        padding: 2em;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      .about-img {
+        margin: 1.5em auto;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+      }
+      p {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        margin-top: 1.5em;
+      }
     </style>
   </head>
   <body>
@@ -174,49 +259,95 @@ ABOUT_HTML = (
     + NAVBAR
     + """
     <div class="container">
-      <h1>About This Website</h1>
-      <img src="/static/IMG_7041.jpg" alt="Dog paw" class="about-img">
-      <p>
-        This website is designed to help return Fargo to us. If you have found Fargo, please use the contact information provided to reach out to us. Thank you for helping reunite Fargo with us!
-      </p>
-    </div>
-  </body>
-</html>
-"""
-)
-
-CONTACT_HTML = (
-    """
-<html>
-  <head>
-    <title>Contact Owner - Return My Dog</title>
-    <style>
-      body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
-      .container { max-width: 700px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
-      h1 { text-align: center; }
-      .contact-img { display: block; margin: 2em auto 1em auto; border-radius: 10px; box-shadow: 0 2px 8px #bbb; width: 180px; }
-      .contact-info { text-align: center; font-size: 1.1em; }
-    </style>
-  </head>
-  <body>
-    """
-    + NAVBAR
-    + """
-    <div class="container">
-      <h1>Contact the Owner</h1>
-      <img src="/static/IMG_5463.jpeg" alt="Dog with collar" class="contact-img">
-      <div class="contact-info">
-        <strong>Confrey family</strong><br>
-        """
-    + nophone
-    + """
-        <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
+      <div class="content-box">
+        <h1>About This Website</h1>
+        <img src="/static/IMG_7041.jpg" alt="Dog paw" class="about-img">
+        <p>
+          This website is designed to help return Fargo to us. If you have found Fargo,
+          please use the contact information provided to reach out. Thank you for helping reunite Fargo with us!
+        </p>
       </div>
     </div>
   </body>
 </html>
 """
 )
+
+
+CONTACT_HTML = (
+    """
+<html>
+  <head>
+    <title>Contact Owner - Return My Dog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em 1em;
+      }
+      .content-box {
+        width: 100%;
+        max-width: 720px;
+        background: #fff;
+        padding: 2em;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      .contact-img {
+        margin: 1.5em auto;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+      }
+      .contact-info {
+        font-size: 1.1em;
+        line-height: 1.6em;
+        margin-top: 1.5em;
+      }
+      a {
+        color: #5f72be;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    """
+    + NAVBAR
+    + """
+    <div class="container">
+      <div class="content-box">
+        <h1>Contact the Owner</h1>
+        <img src="/static/IMG_5463.jpeg" alt="Dog with collar" class="contact-img">
+        <div class="contact-info">
+          <strong>Confrey family</strong><br>
+          """
+    + nophone
+    + """
+          <strong>Email:</strong> <a href="mailto:ifoundfargo@icloud.com">ifoundfargo@icloud.com</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+"""
+)
+
+
 
 
 @app.route("/")
