@@ -1,5 +1,6 @@
-import psycopg2
 import os
+
+import psycopg2
 
 # Get your database URL from environment or hardcode for testing
 EXTDATABASE_URL = os.getenv("EXTDATABASE_URL")
@@ -10,9 +11,11 @@ try:
     cur = conn.cursor()
 
     # Fetch all tables in public schema
-    cur.execute("""
+    cur.execute(
+        """
         SELECT tablename FROM pg_tables WHERE schemaname = 'public';
-    """)
+    """
+    )
     tables = cur.fetchall()
 
     if not tables:
