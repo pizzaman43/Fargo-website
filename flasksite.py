@@ -10,6 +10,8 @@ from user_agents import parse as parse_user_agent
 phone_env = os.getenv("Phone")
 nophone = ""
 
+rewardpage = True
+
 load_dotenv()
 
 # Get Render's DATABASE_URL from environment
@@ -113,10 +115,12 @@ NAVBAR = """
       <a href="/" class="nav-link">🏠 Home</a>
       <a href="/about" class="nav-link">ℹ️ About</a>
       <a href="/contact" class="nav-link">📞 Contact</a>
+      <a href="/reward" class="nav-link">🏅 Reward</a>
     </div>
   </div>
 </nav>
 """
+
 
 
 HOME_HTML = (
@@ -346,6 +350,98 @@ CONTACT_HTML = (
 """
 )
 
+REWARD_HTML = (
+    """
+<html>
+  <head>
+    <title>Reward for Finding Fargo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2em 1em;
+      }
+      .content-box {
+        width: 100%;
+        max-width: 720px;
+        background: #fff;
+        padding: 2em;
+        border-radius: 12px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      .reward-img {
+        margin: 1.5em auto;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+      }
+      .reward-text {
+        font-size: 1.2em;
+        line-height: 1.6em;
+        margin-top: 1.5em;
+      }
+      .reward-amount {
+        font-size: 2em;
+        font-weight: bold;
+        color: #e63946;
+        margin-top: 0.5em;
+      }
+      .contact-link {
+        display: inline-block;
+        margin-top: 2em;
+        background: #5f72be;
+        color: white;
+        padding: 0.9em 2em;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.05em;
+        transition: background 0.3s ease;
+      }
+      .contact-link:hover {
+        background: #4a5bb3;
+      }
+    </style>
+  </head>
+  <body>
+    """
+    + NAVBAR
+    + """
+    <div class="container">
+      <div class="content-box">
+        <h1>Reward Offered</h1>
+        <img src="/static/IMG_7079.jpg" alt="Reward image of Fargo" class="reward-img">
+        <div class="reward-text">
+          Fargo is missing and we are offering a reward to anyone who helps bring him home.
+        </div>
+        <div class="reward-amount">
+           $200 REWARD!
+        </div>
+        <div class="reward-text">
+          No questions asked — if you’ve seen or found Fargo, please reach out right away.
+        </div>
+        <a class="contact-link" href="/contact">📞 Contact Us</a>
+      </div>
+    </div>
+  </body>
+</html>
+"""
+)
+
 
 @app.route("/")
 def home():
@@ -366,6 +462,10 @@ def about():
 def contact():
     return render_template_string(CONTACT_HTML)
 
+@app.route("/reward")
+def reward():
+    if rewardpage == True:
+        return render_template_string(REWARD_HTML)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
