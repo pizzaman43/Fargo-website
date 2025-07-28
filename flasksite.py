@@ -10,7 +10,7 @@ from user_agents import parse as parse_user_agent
 phone_env = os.getenv("Phone")
 nophone = ""
 
-rewardpage = True
+rewardpage = False
 
 load_dotenv()
 
@@ -91,7 +91,38 @@ with app.app_context():
     init_db()
 
 
-NAVBAR = """
+if rewardpage == True:
+    NAVBAR = """
+    <style>
+      .nav-link {
+        color: #fff !important;
+        text-decoration: none !important;
+        font-weight: 500 !important;
+        padding: 0.6em 1.2em !important;
+        border-radius: 30px !important;
+        transition: background 0.3s ease, transform 0.2s ease !important;
+      }
+      .nav-link:hover {
+        background: rgba(255,255,255,0.25) !important;
+        transform: translateY(-3px) !important;
+      }
+    </style>
+    <nav style="background: linear-gradient(135deg, #5f72be 0%, #9921e8 100%); padding: 1.2em; box-shadow: 0 3px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
+      <div style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+        <div style="font-size: 1.6em; font-weight: bold; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
+          🐕 Fargo
+        </div>
+        <div style="display: flex; gap: 1.8em;">
+          <a href="/" class="nav-link">🏠 Home</a>
+          <a href="/about" class="nav-link">ℹ️ About</a>
+          <a href="/contact" class="nav-link">📞 Contact</a>
+          <a href="/reward" class="nav-link">🏅 Reward</a>
+        </div>
+      </div>
+    </nav>
+    """
+else:
+    NAVBAR = """
 <style>
   .nav-link {
     color: #fff !important;
@@ -115,7 +146,6 @@ NAVBAR = """
       <a href="/" class="nav-link">🏠 Home</a>
       <a href="/about" class="nav-link">ℹ️ About</a>
       <a href="/contact" class="nav-link">📞 Contact</a>
-      <a href="/reward" class="nav-link">🏅 Reward</a>
     </div>
   </div>
 </nav>
@@ -461,10 +491,9 @@ def about():
 def contact():
     return render_template_string(CONTACT_HTML)
 
-
-@app.route("/reward")
-def reward():
-    if rewardpage == True:
+if rewardpage == True:
+    @app.route("/reward")
+    def reward():
         return render_template_string(REWARD_HTML)
 
 
