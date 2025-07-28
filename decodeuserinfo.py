@@ -16,6 +16,9 @@ for row in rows:
     id, ip, location, device, browser, os, referrer, timestamp = row
     formatted_time = timestamp.strftime("%Y-%m-%d %H:%M:%S")
 
+    if location == "?, ?, ?":
+        location = "Location Missing"
+
     print(f"[{formatted_time}] {ip} ({location}) - {browser} on {os} via {device}")
 
 
