@@ -183,7 +183,7 @@ CONTACT_HTML = '''
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        ''' + os.environ.get("blankfield") + ''' # This can be replaced with the phone number from .env set "blankfield" to "Phone"
+        ''' + os.getenv("blankfield") + ''' # This can be replaced with the phone number from .env set "blankfield" to "Phone"
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
