@@ -6,6 +6,8 @@ from datetime import datetime
 from user_agents import parse as parse_user_agent
 from dotenv import load_dotenv
 
+phone_env = os.getenv("Phone")
+
 load_dotenv()
 
 # Get Render's DATABASE_URL from environment
@@ -183,13 +185,14 @@ CONTACT_HTML = '''
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        ''' + os.getenv("Phone") + '''
+        ''' + phone_env + '''
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
   </body>
 </html>
 '''
+
 
 @app.route('/')
 def home():
