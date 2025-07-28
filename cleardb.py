@@ -4,11 +4,11 @@ import dotenv
 
 # Load environment variables from .env file
 dotenv.load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL")
+EXTDATABASE_URL = os.getenv("EXTDATABASE_URL")
 
 try:
     print("Connecting to database...")
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg2.connect(EXTDATABASE_URL)
     c = conn.cursor()
 
     print("Clearing userinfo table...")
