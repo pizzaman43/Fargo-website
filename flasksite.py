@@ -206,7 +206,6 @@ HOME_HTML = (
 )
 
 
-
 ABOUT_HTML = (
     """
 <html>
@@ -346,8 +345,6 @@ CONTACT_HTML = (
 </html>
 """
 )
-
-
 
 
 @app.route("/")
