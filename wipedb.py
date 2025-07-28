@@ -1,8 +1,11 @@
-import psycopg2
 import os
 
+import psycopg2
+
 # Get your database URL from environment or hardcode for testing
-DATABASE_URL = os.getenv("DATABASE_URL") or "postgresql://user:password@host:port/dbname"
+DATABASE_URL = (
+    os.getenv("DATABASE_URL") or "postgresql://user:password@host:port/dbname"
+)
 
 try:
     conn = psycopg2.connect(DATABASE_URL)
@@ -10,9 +13,11 @@ try:
     cur = conn.cursor()
 
     # Fetch all tables in public schema
-    cur.execute("""
+    cur.execute(
+        """
         SELECT tablename FROM pg_tables WHERE schemaname = 'public';
-    """)
+    """
+    )
     tables = cur.fetchall()
 
     if not tables:
