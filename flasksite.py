@@ -15,10 +15,10 @@ print("Rewardpage:", Rewardpage)
 phone_env = os.getenv("Phone")
 nophone = ""
 
-rewardpage = True
+rewardpage = False
 
 if rewardpage == True:
-  homeheading = '<h1>Help Return Fargo <span style="color: red;">Reward Offered!</span></h1>'
+  homeheading = '<h1>Help Return Fargo, <span style="color: red;">Reward Offered!</span></h1>'
 else:
     homeheading = "<h1>Help Return Fargo</h1>"
 
