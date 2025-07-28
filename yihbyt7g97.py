@@ -6,4 +6,4 @@ import sys
 
 
 #566rftychgbchcghf
-print(    "fsdefGSERDGersagreghar" )
+print(    "fsdefGSERDGersagreghar"  )
