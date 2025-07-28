@@ -184,8 +184,7 @@ CONTACT_HTML = '''
       <div class="contact-info">
         <strong>Confrey family</strong><br>
         ''' 
-+ os.getenv("Phone") +
-'''
++ os.getenv("Phone") +'''
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
