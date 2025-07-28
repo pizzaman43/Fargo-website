@@ -101,7 +101,7 @@ with app.app_context():
     init_db()
 
 
-if Rewardpage == "True":
+if Rewardpage == True:
     NAVBAR = """
     <style>
       .nav-link {
@@ -163,7 +163,7 @@ else:
 
 
 reward_section = ""
-if Rewardpage == "True":
+if Rewardpage == True:
     reward_section = """
     <div style="background: #fdecea; color: #b12727; border: 2px solid #f5c6cb; padding: 1em; margin: 1.5em 0; border-radius: 10px;">
       <strong>Reward offered for finding Fargo!</strong>
@@ -518,7 +518,7 @@ def contact():
     return render_template_string(CONTACT_HTML)
 
 
-if Rewardpage == "True":
+if Rewardpage == True:
 
     @app.route("/reward")
     def reward():
