@@ -183,8 +183,7 @@ CONTACT_HTML = '''
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        ''' 
-+ os.getenv("Phone") +'''
+        ''' + os.getenv("Phone") + '''
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
