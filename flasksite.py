@@ -12,14 +12,16 @@ nophone = ""
 load_dotenv()
 
 # Get Render's DATABASE_URL from environment
-DATABASE_URL = os.environ.get('DATABASE_URL') #in Render settings
+DATABASE_URL = os.environ.get("DATABASE_URL")  # in Render settings
 
 app = Flask(__name__)
+
 
 def init_db():
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
-    c.execute('''
+    c.execute(
+        """
         CREATE TABLE IF NOT EXISTS visits (
             id SERIAL PRIMARY KEY,
             ip TEXT,
@@ -30,13 +32,16 @@ def init_db():
             referrer TEXT,
             timestamp TIMESTAMPTZ DEFAULT NOW()
         )
-    ''')
+    """
+    )
     conn.commit()
     conn.close()
 
+
 def get_real_ip(request):
-    xff = request.headers.get('X-Forwarded-For', request.remote_addr)
-    return xff.split(',')[0].strip()
+    xff = request.headers.get("X-Forwarded-For", request.remote_addr)
+    return xff.split(",")[0].strip()
+
 
 def geolocate_ip(ip):
     try:
@@ -46,6 +51,7 @@ def geolocate_ip(ip):
     except:
         return "Unknown Location"
 
+
 def store_visit(request):
     ip = get_real_ip(request)
     user_agent_string = request.headers.get("User-Agent")
@@ -54,7 +60,6 @@ def store_visit(request):
     if "Go-http-client" in ua:
         return  # Skip storing these requests
 
-
     # Parse user agent
     ua = parse_user_agent(user_agent_string)
     device = "Mobile" if ua.is_mobile else "Tablet" if ua.is_tablet else "PC"
@@ -62,24 +67,28 @@ def store_visit(request):
     os = f"{ua.os.family} {ua.os.version_string}"
 
     location = geolocate_ip(ip)
-    referrer = request.referrer or 'Direct'
+    referrer = request.referrer or "Direct"
 
     # Insert into PostgreSQL
     conn = psycopg2.connect(DATABASE_URL)
     c = conn.cursor()
-    c.execute('''
+    c.execute(
+        """
         INSERT INTO visits (ip, location, device, browser, os, referrer, timestamp)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
-    ''', (ip, location, device, browser, os, referrer, timestamp))
+    """,
+        (ip, location, device, browser, os, referrer, timestamp),
+    )
     conn.commit()
     conn.close()
+
 
 # Initialize table when app starts
 with app.app_context():
     init_db()
 
 
-NAVBAR = '''
+NAVBAR = """
 <style>
 .nav-link {
   color: #fff !important;
@@ -106,9 +115,10 @@ NAVBAR = '''
     </div>
   </div>
 </nav>
-'''
+"""
 
-HOME_HTML = '''
+HOME_HTML = (
+    """
 <html>
   <head>
     <title>Return My Dog - Home</title>
@@ -125,7 +135,9 @@ HOME_HTML = '''
     </style>
   </head>
   <body>
-    ''' + NAVBAR + '''
+    """
+    + NAVBAR
+    + """
     <div class="container">
       <h1>Help Return Fargo!</h1>
       <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
@@ -140,9 +152,11 @@ HOME_HTML = '''
     </div>
   </body>
 </html>
-'''
+"""
+)
 
-ABOUT_HTML = '''
+ABOUT_HTML = (
+    """
 <html>
   <head>
     <title>About - Return My Dog</title>
@@ -155,7 +169,9 @@ ABOUT_HTML = '''
     </style>
   </head>
   <body>
-    ''' + NAVBAR + '''
+    """
+    + NAVBAR
+    + """
     <div class="container">
       <h1>About This Website</h1>
       <img src="/static/IMG_7041.jpg" alt="Dog paw" class="about-img">
@@ -165,9 +181,11 @@ ABOUT_HTML = '''
     </div>
   </body>
 </html>
-'''
+"""
+)
 
-CONTACT_HTML = '''
+CONTACT_HTML = (
+    """
 <html>
   <head>
     <title>Contact Owner - Return My Dog</title>
@@ -180,38 +198,46 @@ CONTACT_HTML = '''
     </style>
   </head>
   <body>
-    ''' + NAVBAR + '''
+    """
+    + NAVBAR
+    + """
     <div class="container">
       <h1>Contact the Owner</h1>
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        ''' + nophone + '''
+        """
+    + nophone
+    + """
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
   </body>
 </html>
-'''
+"""
+)
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    ip = request.headers.get('X-Forwarded-For', request.remote_addr)
-    user_agent = request.headers.get('User-Agent', '')
-    referrer = request.referrer or ''
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+    user_agent = request.headers.get("User-Agent", "")
+    referrer = request.referrer or ""
     timestamp = datetime.now().isoformat()
     store_visit(request)
     return render_template_string(HOME_HTML, ip=ip)
 
-@app.route('/about')
+
+@app.route("/about")
 def about():
     return render_template_string(ABOUT_HTML)
 
-@app.route('/contact')
+
+@app.route("/contact")
 def contact():
     return render_template_string(CONTACT_HTML)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(debug=False, host="0.0.0.0", port=port)

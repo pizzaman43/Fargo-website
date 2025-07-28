@@ -4,19 +4,21 @@ import dotenv
 
 # Load environment variables from .env file
 dotenv.load_dotenv()
-DATABASE_URL = os.getenv("DATABASE_URL") # Set this in Render's environment variables
+DATABASE_URL = os.getenv("DATABASE_URL")  # Set this in Render's environment variables
 
 conn = psycopg2.connect(DATABASE_URL)
 c = conn.cursor()
 
-c.execute('''
+c.execute(
+    """
     CREATE TABLE IF NOT EXISTS userinfo (
         id SERIAL PRIMARY KEY,
         ip TEXT,
         user_agent TEXT,
         timestamp TEXT
     )
-''')
+"""
+)
 
 conn.commit()
 conn.close()
