@@ -122,7 +122,6 @@ NAVBAR = """
 """
 
 
-
 HOME_HTML = (
     """
 <html>
@@ -462,10 +461,12 @@ def about():
 def contact():
     return render_template_string(CONTACT_HTML)
 
+
 @app.route("/reward")
 def reward():
     if rewardpage == True:
         return render_template_string(REWARD_HTML)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
