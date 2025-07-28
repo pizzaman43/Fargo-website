@@ -10,7 +10,12 @@ from user_agents import parse as parse_user_agent
 phone_env = os.getenv("Phone")
 nophone = ""
 
-rewardpage = False
+rewardpage = True
+
+if rewardpage == True:
+  homeheading = '<h1>Help Return Fargo <span style="color: red;">Reward Offered!</span></h1>'
+else:
+  homeheading = '<h1>Help Return Fargo</h1>'
 
 load_dotenv()
 
@@ -152,6 +157,17 @@ else:
 """
 
 
+reward_section = ""
+if rewardpage:
+    reward_section = """
+    <div style="background: #fdecea; color: #b12727; border: 2px solid #f5c6cb; padding: 1em; margin: 1.5em 0; border-radius: 10px;">
+      <strong>Reward offered for finding Fargo!</strong>
+      <div style="margin-top: 1em;">
+        <button class="my-btn" onclick="window.location.href='/reward'">View Reward Details</button>
+      </div>
+    </div>
+    """
+
 HOME_HTML = (
     """
 <html>
@@ -216,18 +232,21 @@ HOME_HTML = (
     </style>
   </head>
   <body>
-    """
+"""
     + NAVBAR
     + """
     <div class="container">
       <div class="content-box">
-        <h1>Help Return Fargo!</h1>
+        """ + homeheading +"""
         <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
         <div class="info">
           <strong>Name:</strong> Fargo<br>
           <strong>Breed:</strong> Golden Doodle<br>
           <strong>Owner:</strong> Confrey Family<br>
         </div>
+"""
+    + reward_section
+    + """
         <div class="center-btn">
           <button class="my-btn" onclick="window.location.href='/contact'">Contact Owner</button>
         </div>
