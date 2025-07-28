@@ -203,7 +203,7 @@ CONTACT_HTML = (
     + """
     <div class="container">
       <h1>Contact the Owner</h1>
-      <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
+      <img src="static\IMG_5463.jpeg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
         """
