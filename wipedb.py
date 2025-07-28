@@ -2,10 +2,10 @@ import psycopg2
 import os
 
 # Get your database URL from environment or hardcode for testing
-DATABASE_URL = os.getenv("DATABASE_URL") or "postgresql://user:password@host:port/dbname"
+EXTDATABASE_URL = os.getenv("EXTDATABASE_URL")
 
 try:
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg2.connect(EXTDATABASE_URL)
     conn.autocommit = True
     cur = conn.cursor()
 
