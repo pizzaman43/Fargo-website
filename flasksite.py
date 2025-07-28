@@ -15,11 +15,14 @@ print("Rewardpage:", Rewardpage)
 phone_env = os.getenv("Phone")
 nophone = ""
 
+phoneornot = ""
 
 if Rewardpage == True:
   homeheading = '<h1>Help Return Fargo, <span style="color: red;">Reward Offered!</span></h1>'
+  phoneornot = phone_env
 else:
     homeheading = "<h1>Help Return Fargo</h1>"
+    phoneornot = nophone
 
 
 # Get Render's DATABASE_URL from environment
