@@ -12,7 +12,7 @@ try:
     c = conn.cursor()
     
     print("Clearing userinfo table...")
-    c.execute('TRUNCATE TABLE userinfo RESTART IDENTITY')
+    c.execute('TRUNCATE TABLE visits RESTART IDENTITY')
     conn.commit()
     
     print("Table cleared successfully!")
