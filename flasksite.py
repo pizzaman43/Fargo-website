@@ -4,6 +4,9 @@ import requests
 from flask import request, Flask, render_template_string
 from datetime import datetime
 from user_agents import parse as parse_user_agent
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Get Render's DATABASE_URL from environment
 DATABASE_URL = os.environ.get('DATABASE_URL')  # Already set in your Render settings
@@ -180,7 +183,7 @@ CONTACT_HTML = '''
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        <strong>Phone:</strong> <a>845-536-7118</a><br>
+        ''' + os.environ.get("blankfield") + ''' # This can be replaced with the phone number from .env set "blankfield" to "Phone"
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
