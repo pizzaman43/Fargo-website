@@ -44,10 +44,10 @@ def store_visit(request):
     ip = get_real_ip(request)
     user_agent_string = request.headers.get("User-Agent")
     timestamp = datetime.utcnow().isoformat()
+    ua = request.headers.get("User-Agent", "")
+    if "Go-http-client" in ua:
+        return  # Skip storing these requests
 
-    # Skip Render health checks or bots
-    if ip == '127.0.0.1' and user_agent_string == 'Go-http-client/1.1':
-        return
 
     # Parse user agent
     ua = parse_user_agent(user_agent_string)
