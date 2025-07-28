@@ -9,7 +9,7 @@ from user_agents import parse as parse_user_agent
 
 load_dotenv()
 
-Rewardpage = True
+Rewardpage = False
 
 phone_env = os.getenv("Phone")
 nophone = ""
