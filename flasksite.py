@@ -491,7 +491,9 @@ def about():
 def contact():
     return render_template_string(CONTACT_HTML)
 
+
 if rewardpage == True:
+
     @app.route("/reward")
     def reward():
         return render_template_string(REWARD_HTML)
