@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get Render's DATABASE_URL from environment
-DATABASE_URL = os.environ.get('DATABASE_URL')  # Already set in your Render settings
+DATABASE_URL = os.environ.get('DATABASE_URL') #in Render settings
 
 app = Flask(__name__)
 
@@ -183,7 +183,7 @@ CONTACT_HTML = '''
       <img src="/static/IMG_7079.jpg" alt="Dog with collar" class="contact-img">
       <div class="contact-info">
         <strong>Confrey family</strong><br>
-        ''' + os.getenv("Phone") + ''' # This can be replaced with the phone number from .env set "blankfield" to "Phone"
+        ''' + os.getenv("Phone") + '''
         <strong>Email:</strong> <a>ifoundfargo@icloud.com</a>
       </div>
     </div>
