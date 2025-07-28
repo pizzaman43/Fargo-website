@@ -7,6 +7,12 @@ from dotenv import load_dotenv
 from flask import Flask, render_template_string, request
 from user_agents import parse as parse_user_agent
 
+load_dotenv()
+
+
+
+Rewardpage = os.getenv("Rewardpage")
+
 phone_env = os.getenv("Phone")
 nophone = ""
 
@@ -15,9 +21,8 @@ rewardpage = True
 if rewardpage == True:
   homeheading = '<h1>Help Return Fargo <span style="color: red;">Reward Offered!</span></h1>'
 else:
-  homeheading = '<h1>Help Return Fargo</h1>'
+    homeheading = "<h1>Help Return Fargo</h1>"
 
-load_dotenv()
 
 # Get Render's DATABASE_URL from environment
 DATABASE_URL = os.environ.get("DATABASE_URL")  # in Render settings
@@ -237,7 +242,9 @@ HOME_HTML = (
     + """
     <div class="container">
       <div class="content-box">
-        """ + homeheading +"""
+        """
+    + homeheading
+    + """
         <img src="/static/IMG_6736.jpg" alt="Dog photo" class="dog-img">
         <div class="info">
           <strong>Name:</strong> Fargo<br>
@@ -387,7 +394,7 @@ CONTACT_HTML = (
         <div class="contact-info">
           <strong>Confrey family</strong><br>
           """
-    + nophone
+    + phoneornot
     + """
           <strong>Email:</strong> <a href="mailto:ifoundfargo@icloud.com">ifoundfargo@icloud.com</a>
         </div>
