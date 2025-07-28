@@ -1,11 +1,11 @@
-name: Format with Black and Push
+name: Format with isort and Black and Push
 
 on:
   push:
     branches: [main]
 
 jobs:
-  black_format:
+  format:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +19,11 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Install black
-      run: pip install black
+    - name: Install black and isort
+      run: pip install black isort
+
+    - name: Run isort
+      run: isort .
 
     - name: Run black
       run: black .
@@ -30,5 +33,5 @@ jobs:
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add .
-        git diff-index --quiet HEAD || git commit -m "Auto-format with black"
+        git diff-index --quiet HEAD || git commit -m "Auto-format with isort and black"
         git push
