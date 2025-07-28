@@ -16,7 +16,7 @@ phone_env = os.getenv("Phone")
 nophone = ""
 
 
-if rewardpage == True:
+if Rewardpage == True:
   homeheading = '<h1>Help Return Fargo, <span style="color: red;">Reward Offered!</span></h1>'
 else:
     homeheading = "<h1>Help Return Fargo</h1>"
