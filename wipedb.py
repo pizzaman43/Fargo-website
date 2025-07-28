@@ -2,7 +2,7 @@ import os
 
 import psycopg2
 
-# Get your database URL from environment or hardcode for testing
+# Get your database URL from environment or hardcode for testing only
 EXTDATABASE_URL = os.getenv("EXTDATABASE_URL")
 
 try:
